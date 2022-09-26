@@ -153,7 +153,6 @@ void GeneratingPhase::run() {
     cout << endl;
     for (auto p : secretPegs)
       cout << PegColors.at(p) << " ";
-
     cout << endl;
   }
 
