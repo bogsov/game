@@ -6,6 +6,7 @@
 #include <ctime>
 #include <iostream>
 #include <thread>
+
 #ifdef CHEAT_MODE
 constexpr bool cheating = true;
 #else
@@ -52,6 +53,7 @@ void GamePlayPhase::run() {
     cout << endl;
     string guess;
     int guessInteger;
+
     for (size_t i = 0; i < 4; i++) {
       while (true) {
         cin >> guess;
@@ -65,12 +67,12 @@ void GamePlayPhase::run() {
       }
       playersGuess.push_back(static_cast<PegColor>(guessInteger));
     }
+
     auto feedback = giveFeedback(playersGuess, secretPegs);
 
     for (const auto &f : feedback) {
       cout << TipColors.at(f) << " ";
     }
-
     cout << endl;
 
     if (won(feedback)) {
@@ -106,9 +108,11 @@ vector<FeedbackColor> GamePlayPhase::giveFeedback(vector<PegColor> playersGuess,
   // Find all guessed colors
   sort(playersGuess.begin(), playersGuess.end());
   sort(secretPegs.begin(), secretPegs.end());
+
   vector<PegColor> intersection;
   set_intersection(playersGuess.begin(), playersGuess.end(), secretPegs.begin(),
                    secretPegs.end(), back_inserter(intersection));
+
   auto rightColorButWrongPlace = intersection.size() - rightColorAndPlace;
 
   // Append feedback with all the guessed colors minus the previously
@@ -122,14 +126,17 @@ vector<FeedbackColor> GamePlayPhase::giveFeedback(vector<PegColor> playersGuess,
 bool GamePlayPhase::won(const vector<FeedbackColor> &feedback) {
   if (feedback.size() != PROBLEM_SIZE)
     return false;
+
   for (const auto &fb : feedback) {
     if (FeedbackColor::BLACK != fb)
       return false;
   }
+
   return true;
 }
 
 GeneratingPhase::GeneratingPhase(GameInterface &game) : game(game) {}
+
 void GeneratingPhase::run() {
   cout << "New game starting" << endl;
   std::this_thread::sleep_for(1500ms);
@@ -143,13 +150,14 @@ void GeneratingPhase::run() {
   }
 
   if (cheating) {
+    cout << endl;
     for (auto p : secretPegs)
-      cout << static_cast<int>(p) << " ";
+      cout << PegColors.at(p) << " ";
 
     cout << endl;
   }
 
-  cout << "Secret sequence generated" << endl;
+  cout << endl << "Secret sequence generated" << endl << endl;
   game.setNextPhase(make_unique<GamePlayPhase>(
       GamePlayPhase(game, PLAYERS_MOVES, secretPegs)));
 }
@@ -162,18 +170,18 @@ void GameMastermind::runGame() {
   setNextPhase(make_unique<GeneratingPhase>(GeneratingPhase(*this)));
   auto gamesWonSofar = 0;
   auto allGames = 0;
-  
+
   while (true) {
-    if (GamePhaseType::GENERATING_PROBLEM == getCurrentPhaseType())
+    if (GamePhaseType::GENERATING_PROBLEM == getCurrentPhaseType()) {
+      cout << "Already won " << gamesWonSofar << " out of " << allGames
+           << " games" << endl;
       allGames++;
+    }
 
     currentPhase->run();
 
-    if (GamePhaseType::GAME_WON == getCurrentPhaseType()) {
+    if (GamePhaseType::GAME_WON == getCurrentPhaseType())
       gamesWonSofar++;
-      cout << "Already won " << gamesWonSofar << " out of " << allGames
-           << " games" << endl;
-    }
   }
 }
 

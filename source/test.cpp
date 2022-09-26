@@ -9,7 +9,7 @@ struct GameInterfaceFake : public GameInterface {
 
 class MastermindFeedbackTest : public ::testing::Test {
 protected:
-  void SetUp() override { GameInterfaceFake gameFake; }
+  void SetUp() override {}
 
   void TearDown() override {}
 
