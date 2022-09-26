@@ -8,4 +8,4 @@
 .history/
 
 *.vsix
-main
+source/main
