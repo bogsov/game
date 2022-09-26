@@ -9,6 +9,7 @@ This is a naive implementation of the Mastermind game.
 cd build/
 cmake ../
 ninja mastermind
+ninja mastermindCheat
 ninja mastermindTest
 ```
 
