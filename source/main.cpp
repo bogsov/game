@@ -1,7 +1,6 @@
-#include "game.hpp"
+#include "game.h"
 
-
-int main(){
-    GameMastermind game;
-    game.runGame();
+int main() {
+  GameMastermind game;
+  game.runGame();
 }

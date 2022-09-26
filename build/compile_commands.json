@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/bogso/repos/Game/build",
+  "command": "/usr/bin/clang++-8 -g -o CMakeFiles/mastermind.dir/source/main.cpp.o -c /home/bogso/repos/Game/source/main.cpp",
+  "file": "/home/bogso/repos/Game/source/main.cpp"
+},
+{
+  "directory": "/home/bogso/repos/Game/build",
+  "command": "/usr/bin/clang++-8 -g -o CMakeFiles/mastermind.dir/source/game.cpp.o -c /home/bogso/repos/Game/source/game.cpp",
+  "file": "/home/bogso/repos/Game/source/game.cpp"
+},
+{
+  "directory": "/home/bogso/repos/Game/build",
+  "command": "/usr/bin/clang++-8 -g -DCHEAT_MODE -o CMakeFiles/mastermindCheat.dir/source/main.cpp.o -c /home/bogso/repos/Game/source/main.cpp",
+  "file": "/home/bogso/repos/Game/source/main.cpp"
+},
+{
+  "directory": "/home/bogso/repos/Game/build",
+  "command": "/usr/bin/clang++-8 -g -DCHEAT_MODE -o CMakeFiles/mastermindCheat.dir/source/game.cpp.o -c /home/bogso/repos/Game/source/game.cpp",
+  "file": "/home/bogso/repos/Game/source/game.cpp"
+},
+{
+  "directory": "/home/bogso/repos/Game/build",
+  "command": "/usr/bin/clang++-8 -g -o CMakeFiles/mastermindTest.dir/source/test.cpp.o -c /home/bogso/repos/Game/source/test.cpp",
+  "file": "/home/bogso/repos/Game/source/test.cpp"
+},
+{
+  "directory": "/home/bogso/repos/Game/build",
+  "command": "/usr/bin/clang++-8 -g -o CMakeFiles/mastermindTest.dir/source/game.cpp.o -c /home/bogso/repos/Game/source/game.cpp",
+  "file": "/home/bogso/repos/Game/source/game.cpp"
+}
+]

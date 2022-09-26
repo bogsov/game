@@ -1,0 +1,16 @@
+# ninja log v5
+1	776	1664233755044733378	CMakeFiles/mastermindCheat.dir/source/game.cpp.o	6179c7e734fe3590
+1	260	1664233168599374912	/home/bogso/repos/Game/build/mastermindTest[1]_tests.cmake	4112ed574c781d4d
+1	260	1664233168599374912	mastermindTest	4112ed574c781d4d
+0	3	0	clean	a31eedcededa8236
+776	880	1664233755152733003	mastermindCheat	242fbf6f62662d05
+766	870	1664233730096832751	mastermind	483adaf1bcd9cc51
+1	766	1664233729988833235	CMakeFiles/mastermind.dir/source/game.cpp.o	55340cd06f8c8df0
+1	480	1664233729700834537	CMakeFiles/mastermind.dir/source/main.cpp.o	655362a0644993ee
+0	487	1664233754760734373	CMakeFiles/mastermindCheat.dir/source/main.cpp.o	d0b988b51c4ac3e4
+1	797	1664232863814587086	CMakeFiles/mastermindTest.dir/source/game.cpp.o	af84118be74f1ac6
+1	260	1664233168599374912	mastermindTest[1]_tests.cmake	4112ed574c781d4d
+0	923	1664232863938611257	CMakeFiles/mastermindTest.dir/source/test.cpp.o	6a14c94294868b81
+1	482	1664234190261432451	CMakeFiles/mastermindCheat.dir/source/main.cpp.o	90ecb829ee95699e
+1	788	1664234190565433828	CMakeFiles/mastermindCheat.dir/source/game.cpp.o	368ca5eea9e4f36
+789	908	1664234190689434390	mastermindCheat	c5096907592b4f5d
