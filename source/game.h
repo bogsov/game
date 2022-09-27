@@ -35,8 +35,7 @@ public:
 private:
   FRIEND_TEST(MastermindFeedbackTest, FeedbackTest);
   bool isValidPegColor(int guess);
-  vector<FeedbackColor> giveFeedback(vector<PegColor> playersGuess,
-                                     vector<PegColor> secretPegs);
+  vector<FeedbackColor> giveFeedback(vector<PegColor> playersGuess);
   bool won(const vector<FeedbackColor> &feedback);
   GameInterface &game;
   const size_t moves;

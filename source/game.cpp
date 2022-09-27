@@ -68,7 +68,7 @@ void GamePlayPhase::run() {
       playersGuess.push_back(static_cast<PegColor>(guessInteger));
     }
 
-    auto feedback = giveFeedback(playersGuess, secretPegs);
+    auto feedback = giveFeedback(playersGuess);
 
     for (const auto &f : feedback) {
       cout << TipColors.at(f) << " ";
@@ -92,8 +92,7 @@ GamePhaseType GamePlayPhase::getPhaseType() {
   return GamePhaseType::PLAYERS_MOVE;
 }
 
-vector<FeedbackColor> GamePlayPhase::giveFeedback(vector<PegColor> playersGuess,
-                                                  vector<PegColor> secretPegs) {
+vector<FeedbackColor> GamePlayPhase::giveFeedback(vector<PegColor> playersGuess) {
 
   // First find right color and right place
   vector<FeedbackColor> result;

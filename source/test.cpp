@@ -25,46 +25,46 @@ static vector<PegColor> getPegs(initializer_list<int> list) {
 
 TEST_F(MastermindFeedbackTest, FeedbackTest) {
   vector<PegColor> pegs = getPegs({1, 2, 3, 4});
-  GamePlayPhase gp(gameFake, 5, pegs);
+  GamePlayPhase gp(gameFake, 0, pegs);
   vector<FeedbackColor> feedback;
   {
     feedback = {FeedbackColor::BLACK, FeedbackColor::BLACK,
                 FeedbackColor::BLACK, FeedbackColor::BLACK};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 2, 3, 4}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 2, 3, 4})));
   }
   {
     feedback = {FeedbackColor::WHITE, FeedbackColor::WHITE,
                 FeedbackColor::WHITE, FeedbackColor::WHITE};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({4, 3, 2, 1}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({4, 3, 2, 1})));
   }
   {
     feedback = {FeedbackColor::BLACK, FeedbackColor::WHITE,
                 FeedbackColor::WHITE, FeedbackColor::WHITE};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 3, 4, 2}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 3, 4, 2})));
   }
   {
     feedback = {FeedbackColor::BLACK, FeedbackColor::BLACK};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 2, 5, 5}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 2, 5, 5})));
   }
   {
     feedback = {FeedbackColor::WHITE, FeedbackColor::WHITE};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({5, 1, 2, 1}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({5, 1, 2, 1})));
   }
   {
     feedback = {FeedbackColor::BLACK};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 1, 1, 1}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 1, 1, 1})));
   }
   {
     feedback = {FeedbackColor::WHITE, FeedbackColor::WHITE};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({2, 1, 1, 1}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({2, 1, 1, 1})));
   }
   {
     feedback = {FeedbackColor::BLACK, FeedbackColor::BLACK};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 2}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({1, 2})));
   }
   {
     feedback = {};
-    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({}), pegs));
+    EXPECT_EQ(feedback, gp.giveFeedback(getPegs({})));
   }
 }
 

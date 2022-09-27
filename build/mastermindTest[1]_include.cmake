@@ -1,5 +1,0 @@
-if(EXISTS "/home/bogso/repos/Game/build/mastermindTest[1]_tests.cmake")
-  include("/home/bogso/repos/Game/build/mastermindTest[1]_tests.cmake")
-else()
-  add_test(mastermindTest_NOT_BUILT mastermindTest_NOT_BUILT)
-endif()
