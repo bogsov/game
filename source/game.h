@@ -37,6 +37,9 @@ private:
   bool isValidPegColor(int guess);
   vector<FeedbackColor> giveFeedback(vector<PegColor> playersGuess);
   bool won(const vector<FeedbackColor> &feedback);
+  vector<PegColor> getPlayersGuess();
+  
+  private:
   GameInterface &game;
   const size_t moves;
   std::vector<PegColor> secretPegs;
@@ -60,5 +63,6 @@ public:
 
 private:
   GamePhaseType getCurrentPhaseType();
+private:
   unique_ptr<GamePhaseInterface> currentPhase;
 };

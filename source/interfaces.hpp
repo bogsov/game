@@ -31,7 +31,7 @@ enum class FeedbackColor {
   BLACK,
 };
 
-const std::map<FeedbackColor, string> TipColors = {
+const std::map<FeedbackColor, string> FeedbackColors = {
     {FeedbackColor::BLACK, "BLACK"}, {FeedbackColor::WHITE, "WHITE"}};
 
 class GamePhaseInterface {

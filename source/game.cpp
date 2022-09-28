@@ -15,7 +15,8 @@ constexpr bool cheating = false;
 using namespace std;
 
 GameOverPhase::GameOverPhase(GameInterface &game) : game(game) {}
-void GameOverPhase::run() {
+void GameOverPhase::run()
+{
   cout << "Game over!" << endl;
   std::this_thread::sleep_for(1500ms);
   cout << "Let's try again!" << endl;
@@ -25,7 +26,8 @@ void GameOverPhase::run() {
 GamePhaseType GameOverPhase::getPhaseType() { return GamePhaseType::GAME_OVER; }
 
 GameWonPhase::GameWonPhase(GameInterface &game) : game(game) {}
-void GameWonPhase::run() {
+void GameWonPhase::run()
+{
   cout << "Game won!" << endl;
   std::this_thread::sleep_for(1500ms);
   cout << "Let's start again!" << endl;
@@ -38,44 +40,28 @@ GamePlayPhase::GamePlayPhase(GameInterface &game, size_t movesNumber,
                              std::vector<PegColor> pegs)
     : game(game), moves(movesNumber), secretPegs(pegs) {}
 
-void GamePlayPhase::run() {
+void GamePlayPhase::run()
+{
   auto movesToGo = moves;
 
-  while (movesToGo > 0) {
-    vector<PegColor> playersGuess;
+  while (movesToGo > 0)
+  {
+
     cout << "Moves to go: " << movesToGo << endl;
     movesToGo--;
-    cout << "Please provide 4 numbers for your guess: ";
 
-    for (const auto color : PegColors)
-      cout << static_cast<int>(color.first) << ":" << color.second << " ";
-
-    cout << endl;
-    string guess;
-    int guessInteger;
-
-    for (size_t i = 0; i < 4; i++) {
-      while (true) {
-        cin >> guess;
-        try {
-          guessInteger = stoi(guess);
-          if (isValidPegColor(guessInteger))
-            break;
-        } catch (...) {
-        }
-        cout << "Please provide valid number: " << endl;
-      }
-      playersGuess.push_back(static_cast<PegColor>(guessInteger));
-    }
+    auto playersGuess = getPlayersGuess();
 
     auto feedback = giveFeedback(playersGuess);
 
-    for (const auto &f : feedback) {
-      cout << TipColors.at(f) << " ";
+    for (const auto &f : feedback)
+    {
+      cout << FeedbackColors.at(f) << " ";
     }
     cout << endl;
 
-    if (won(feedback)) {
+    if (won(feedback))
+    {
       game.setNextPhase(make_unique<GameWonPhase>(GameWonPhase(game)));
       return;
     }
@@ -83,21 +69,58 @@ void GamePlayPhase::run() {
   game.setNextPhase(make_unique<GameOverPhase>(GameOverPhase(game)));
 }
 
-bool GamePlayPhase::isValidPegColor(int guess) {
+bool GamePlayPhase::isValidPegColor(int guess)
+{
   auto peg = static_cast<PegColor>(guess);
   return (peg >= PegColor::RED) and (peg <= PegColor::YELLOW);
 }
 
-GamePhaseType GamePlayPhase::getPhaseType() {
+vector<PegColor> GamePlayPhase::getPlayersGuess()
+{
+  cout << "Please provide 4 numbers for your guess: ";
+    for (const auto color : PegColors)
+      cout << static_cast<int>(color.first) << ":" << color.second << " ";
+    cout << endl;
+
+  vector<PegColor> playersGuess;
+  string guess;
+  int guessInteger;
+
+  for (size_t i = 0; i < PROBLEM_SIZE; i++)
+  {
+    while (true)
+    {
+      cin >> guess;
+      try
+      {
+        guessInteger = stoi(guess);
+        if (isValidPegColor(guessInteger))
+          break;
+      }
+      catch (...)
+      {
+      }
+      cout << "Please provide valid number: " << endl;
+    }
+    playersGuess.push_back(static_cast<PegColor>(guessInteger));
+  }
+  return playersGuess;
+}
+
+GamePhaseType GamePlayPhase::getPhaseType()
+{
   return GamePhaseType::PLAYERS_MOVE;
 }
 
-vector<FeedbackColor> GamePlayPhase::giveFeedback(vector<PegColor> playersGuess) {
+vector<FeedbackColor> GamePlayPhase::giveFeedback(vector<PegColor> playersGuess)
+{
 
   // First find right color and right place
   vector<FeedbackColor> result;
-  for (size_t i = 0; i < playersGuess.size(); i++) {
-    if (secretPegs[i] == playersGuess[i]) {
+  for (size_t i = 0; i < playersGuess.size(); i++)
+  {
+    if (secretPegs[i] == playersGuess[i])
+    {
       result.push_back(FeedbackColor::BLACK);
     }
   }
@@ -122,11 +145,13 @@ vector<FeedbackColor> GamePlayPhase::giveFeedback(vector<PegColor> playersGuess)
   return result;
 }
 
-bool GamePlayPhase::won(const vector<FeedbackColor> &feedback) {
+bool GamePlayPhase::won(const vector<FeedbackColor> &feedback)
+{
   if (feedback.size() != PROBLEM_SIZE)
     return false;
 
-  for (const auto &fb : feedback) {
+  for (const auto &fb : feedback)
+  {
     if (FeedbackColor::BLACK != fb)
       return false;
   }
@@ -136,41 +161,50 @@ bool GamePlayPhase::won(const vector<FeedbackColor> &feedback) {
 
 GeneratingPhase::GeneratingPhase(GameInterface &game) : game(game) {}
 
-void GeneratingPhase::run() {
+void GeneratingPhase::run()
+{
   cout << "New game starting" << endl;
   std::this_thread::sleep_for(1500ms);
   cout << "Generating secret peg sequence to be guessed by player" << endl;
   std::this_thread::sleep_for(1500ms);
   std::srand(std::time(0));
 
-  for (size_t i = 0; i < PROBLEM_SIZE; i++) {
+  for (size_t i = 0; i < PROBLEM_SIZE; i++)
+  {
     const auto peg = std::rand() % (PegColors.size());
     secretPegs.push_back(static_cast<PegColor>(peg));
   }
 
-  if (cheating) {
+  if (cheating)
+  {
     cout << endl;
     for (auto p : secretPegs)
       cout << PegColors.at(p) << " ";
     cout << endl;
   }
 
-  cout << endl << "Secret sequence generated" << endl << endl;
+  cout << endl
+       << "Secret sequence generated" << endl
+       << endl;
   game.setNextPhase(make_unique<GamePlayPhase>(
       GamePlayPhase(game, PLAYERS_MOVES, secretPegs)));
 }
 
-GamePhaseType GeneratingPhase::getPhaseType() {
+GamePhaseType GeneratingPhase::getPhaseType()
+{
   return GamePhaseType::GENERATING_PROBLEM;
 }
 
-void GameMastermind::runGame() {
+void GameMastermind::runGame()
+{
   setNextPhase(make_unique<GeneratingPhase>(GeneratingPhase(*this)));
   auto gamesWonSofar = 0;
   auto allGames = 0;
 
-  while (true) {
-    if (GamePhaseType::GENERATING_PROBLEM == getCurrentPhaseType()) {
+  while (true)
+  {
+    if (GamePhaseType::GENERATING_PROBLEM == getCurrentPhaseType())
+    {
       cout << "Already won " << gamesWonSofar << " out of " << allGames
            << " games" << endl;
       allGames++;
@@ -183,10 +217,12 @@ void GameMastermind::runGame() {
   }
 }
 
-void GameMastermind::setNextPhase(unique_ptr<GamePhaseInterface> phase) {
+void GameMastermind::setNextPhase(unique_ptr<GamePhaseInterface> phase)
+{
   currentPhase = move(phase);
 }
 
-GamePhaseType GameMastermind::getCurrentPhaseType() {
+GamePhaseType GameMastermind::getCurrentPhaseType()
+{
   return currentPhase->getPhaseType();
 }
