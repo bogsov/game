@@ -4,6 +4,7 @@
 #include <map>
 #include <string>
 #include <vector>
+
 using namespace std;
 
 constexpr size_t PROBLEM_SIZE = 4;
